@@ -1,14 +1,34 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 import video_detection
+import time
+import os
+from pytube import YouTube
 
 app = Flask(__name__)
 
-detect = video_detection.Detection("test2.mp4")
-
 
 @app.route("/")
-def homepage():
+def index():
     return render_template("index.html")
+
+
+@app.route("/answer", methods=["POST", "GET"])
+def answer():
+    if request.method == "POST":
+        video_url = request.form.get("user_url")
+        global user_video, detect
+        user_video = YouTube(video_url)
+        os.chdir("../deneme-z/videos")
+        user_video.streams.filter(
+            progressive=True, file_extension='mp4', res="360p").first().download()
+        detect = video_detection.Detection(user_video.title+"mp4")
+        return render_template("answer.html", answer=user_video.title)
+
+    else:
+        return render_template("answer.html")
+
+
+time.sleep(4)
 
 
 """
