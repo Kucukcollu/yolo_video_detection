@@ -16,19 +16,19 @@ def index():
 def answer():
     if request.method == "POST":
         video_url = request.form.get("user_url")
-        global user_video, detect
+        global user_video
         user_video = YouTube(video_url)
-        os.chdir("../deneme-z/videos")
+        os.chdir("../yolo_video_detection/videos")
         user_video.streams.filter(
             progressive=True, file_extension='mp4', res="360p").first().download()
-        detect = video_detection.Detection(user_video.title+"mp4")
+        time.sleep(6)
+        global detect
+        detect = video_detection.Detection(user_video.title+".mp4")
+
         return render_template("answer.html", answer=user_video.title)
 
     else:
         return render_template("answer.html")
-
-
-time.sleep(4)
 
 
 """
