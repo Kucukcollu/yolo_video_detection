@@ -10,23 +10,12 @@
 
 <body>
 
-    <form action="/answer" method="post">
+    <form action="/video" method="post">
         <h2>Please enter a URL to detect: </h2>
         <input type="url" name="user_url"><br><br>
         <button type="submit"> Detect</button>
     </form>
 
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8  offset-lg-2">
-                    <h1>YOLO based Video Detection</h1>
-                    <h3 class="mt-5">Detected Video Streaming</h3>
-                    <img src="{{ url_for('detected_video') }}" width="50%">
-                </div>
-            </div>
-        </div>
-    </body>
 </body>
 
 </html>

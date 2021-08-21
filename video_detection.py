@@ -5,13 +5,15 @@
 import cv2
 import numpy as np
 import time
+import os
 
 
 class Detection():
 
     def __init__(self, video_name):
         self.video_name = video_name
-        self.cap = cv2.VideoCapture("videos/" + self.video_name)
+        #self.cap = cv2.VideoCapture("videos/" + self.video_name)
+        self.cap = cv2.VideoCapture(self.video_name)
 
     def gen_frames(self):  # generate frame by frame from camera
         while True:
@@ -28,7 +30,7 @@ class Detection():
     # detection with yolov3-tiny model
     # which is more faster(high FPS)
     def tiny_detection(self):
-
+        os.chdir("..")
         # Load Yolo
         net = cv2.dnn.readNet("cfg/yolov3-tiny.weights",
                               "cfg/yolov3-tiny.cfg")

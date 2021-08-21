@@ -1,47 +1,50 @@
 from flask import Flask, render_template, Response, request
 import video_detection
 import time
-import os
 from pytube import YouTube
+import os
 
 app = Flask(__name__)
 
 
+# homepage
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-@app.route("/answer", methods=["POST", "GET"])
-def answer():
+# original video should be here
+@app.route("/video", methods=["GET", "POST"])
+def video():
+    global video
     if request.method == "POST":
         video_url = request.form.get("user_url")
-        global user_video
-        user_video = YouTube(video_url)
+        video = YouTube(video_url)
         os.chdir("../yolo_video_detection/videos")
-        user_video.streams.filter(
+        video.streams.filter(
             progressive=True, file_extension='mp4', res="360p").first().download()
-        time.sleep(6)
-        global detect
-        detect = video_detection.Detection(user_video.title+".mp4")
-
-        return render_template("answer.html", answer=user_video.title)
-
+        time.sleep(8)
+        return render_template("video.html", answer=video.title)
     else:
-        return render_template("answer.html")
+        return render_template("video.html")
 
 
 """
-@app.route("/original_video")
-def original_video():
+# open video in here
+@app.route("/open")
+def open():
+    detect = video_detection.Detection(video.title+".mp4")
     return Response(detect.gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 """
 
 
-@app.route("/detected_video")
-def detected_video():
+# detected video should be here
+@app.route("/detected")
+def detected():
+    detect = video_detection.Detection(video.title+".mp4")
+#    time.sleep(8)
     return Response(detect.tiny_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
