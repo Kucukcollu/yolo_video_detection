@@ -2,4 +2,4 @@ flask
 gunicorn
 opencv-contrib-python-headless
 numpy
-pytube
+pytube3
