@@ -23,7 +23,7 @@ def video():
         os.chdir("../yolo_video_detection/videos")
         video.streams.filter(
             progressive=True, file_extension='mp4', res="360p").first().download()
-        time.sleep(8)
+#        time.sleep(8)
         return render_template("video.html", answer=video.title)
     else:
         return render_template("video.html")
