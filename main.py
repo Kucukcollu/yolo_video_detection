@@ -23,26 +23,21 @@ def video():
         os.chdir("../yolo_video_detection/videos")
         video.streams.filter(
             progressive=True, file_extension='mp4', res="360p").first().download()
-#        time.sleep(8)
+        os.chdir("/home/robot/projects/yolo_video_detection/videos/")
+
+        for file in os.listdir("/home/robot/projects/yolo_video_detection/videos/"):
+            old_name = file
+            new_name = "test.mp4"
+        os.rename(old_name, new_name)
         return render_template("video.html", answer=video.title)
     else:
         return render_template("video.html")
 
 
-"""
-# open video in here
-@app.route("/open")
-def open():
-    detect = video_detection.Detection(video.title+".mp4")
-    return Response(detect.gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
-"""
-
-
 # detected video should be here
 @app.route("/detected")
 def detected():
-    detect = video_detection.Detection(video.title+".mp4")
-#    time.sleep(8)
+    detect = video_detection.Detection("test.mp4")
     return Response(detect.tiny_detection(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
