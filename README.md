@@ -18,9 +18,9 @@ Select a YouTube video and paste the URL space then see what happens :wink:
 #### PyTube => 11.0.0<br></br>
 
 ## Installation and Run
-#### `git clone https://github.com/Kucukcollu/yolo_video_detection.git`
+#### `$ git clone https://github.com/Kucukcollu/yolo_video_detection.git`
 #### and run with
-#### `python 3.8 main.py`
+#### `$ python 3.8 main.py`
 
 ## Tests
 ![](https://github.com/Kucukcollu/yolo_video_detection/blob/master/adds/how_to_3.gif)<br></br>
