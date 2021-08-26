@@ -22,7 +22,7 @@ Select a YouTube video and paste the URL space then see what happens :wink:
 #### and run with
 #### `python 3.8 main.py`
 
-## Results
+## Tests
 ![](https://github.com/Kucukcollu/yolo_video_detection/blob/master/adds/how_to_3.gif)<br></br>
 
 ![](https://github.com/Kucukcollu/yolo_video_detection/blob/master/adds/how_to_2.gif)<br></br>
